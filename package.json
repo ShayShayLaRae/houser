@@ -2,7 +2,10 @@
   "name": "houser",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://localhost:4000",
+  "main": "server/index.js",
   "dependencies": {
+    "massive": "^6.1.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0"
