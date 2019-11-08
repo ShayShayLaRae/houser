@@ -12,6 +12,7 @@ export default class Wizard extends Component{
         };
         
         }
+
     clearInputs(){
         this.setState({name: '', address: '', city: '', state: '', zip_code: ''})
     }
