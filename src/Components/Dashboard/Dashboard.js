@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import House from '../House/House'
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 
 export default class Dashboard extends Component{
@@ -17,6 +18,7 @@ export default class Dashboard extends Component{
             });
         });
     }
+
     render(){
         return(
             <div>
@@ -24,8 +26,13 @@ export default class Dashboard extends Component{
                 {this.state.houseList.map(h =>
                 <House key={h.id} house={h} />
                     )}
-                    <button>Add New Property</button>
+                    <Link to='/wizard'>
+                    <button className='propertyBtn'>
+                    Add New Property
+                    </button>
+                    </Link>
             </div>
+
         )
     }
 }
