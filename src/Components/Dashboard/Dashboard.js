@@ -11,7 +11,7 @@ export default class Dashboard extends Component{
     }
 
     componentDidMount(){
-        axios.get('http://localhost:4000/api/houses')
+        axios.get('http://localhost:4000/api/')
         .then(results => {
             this.setState({
                 houseList: results.data

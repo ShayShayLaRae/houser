@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import axios from 'axios';
+
 
 export default class Wizard extends Component{
     constructor(){
@@ -15,6 +17,15 @@ export default class Wizard extends Component{
 
     clearInputs(){
         this.setState({name: '', address: '', city: '', state: '', zip_code: ''})
+    }
+    onClick(){
+        axios.post('http://localhost/api/wizard', {
+            name: this.state.nameChangeHandler,
+            address: this.state.addressChangeHandler,
+            city: this.state.cityChangeHandler,
+            state: this.state.stateChangeHandler,
+            zip_code: this.state.stateChangeHandler
+        })
     }
     nameChangeHandler(event) {
         this.setState({name: event.target.value})
@@ -37,40 +48,43 @@ export default class Wizard extends Component{
         return(
             <div>
                 <input 
-                value={name}
-                placeholder='title'
-                type='text'
-                onChange={e => this.nameChangeHandler(e)}
+                    value={name}
+                    placeholder='title'
+                    type='text'
+                    onChange={e => this.nameChangeHandler(e)}
                  />
                 <input  
-                value={address}
-                placeholder='address'
-                type='text'
-                onChange={e => this.addressChangeHandler(e)}
+                    value={address}
+                    placeholder='address'
+                    type='text'
+                    onChange={e => this.addressChangeHandler(e)}
                  />
                 <input  
-                value={city}
-                placeholder='city'
-                type='text'
-                onChange={e => this.cityChangeHandler(e)}
+                    value={city}
+                    placeholder='city'
+                    type='text'
+                    onChange={e => this.cityChangeHandler(e)}
                  />
                  <input 
-                 value={state}
-                 placeholder='state'
-                 type='text'
-                 onChange={e => this.stateChangeHandler(e)}
+                    value={state}
+                    placeholder='state'
+                    type='text'
+                    onChange={e => this.stateChangeHandler(e)}
                  />
                  <input 
-                 value={zip_code}
-                 placeholder='zip'
-                 type='text'
-                 onChange={e => this.zip_codeChangeHandler(e)}
+                    value={zip_code}
+                    placeholder='zip'
+                    type='text'
+                    onChange={e => this.zip_codeChangeHandler(e)}
                  />
                  <button onClick={event =>{
                      this.clearInputs()
-                 }}
-                 >Cancel</button>
-                 <button>Complete</button>
+                 }}>
+                    Cancel
+                 </button>
+                 <button onClick={this.onClick()}>
+                     Complete
+                </button>
 
             </div>
         )

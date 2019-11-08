@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/api/houses', ctrl.getHouses);
+app.get('/api/', ctrl.getHouses);
 app.post('/api/wizard', ctrl.addHouse);
 app.delete('/api/wizard/:id', ctrl.deleteHouse);
 
