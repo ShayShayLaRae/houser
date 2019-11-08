@@ -7,7 +7,9 @@ const {SERVER_PORT, CONNECTION_STRING} = process.env;
 const app = express();
 app.use(express.json());
 
-
+app.post('/api/wizard', ctrl.addHouse);
+app.get('/api/wizard', ctrl.getHouses);
+app.delete('/api/wizard/:id', ctrl.deleteHouse);
 
 massive(CONNECTION_STRING).then(databaseConnection => {
     app.set('db', databaseConnection);
