@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.css';
-import Dashboard from './Components/Dashboard/Dashboard';
-import Wizard from './Components/Wizard/Wizard';
 import Header from './Components/Header/Header';
+import routes from './routes';
 
 
 function App() {
@@ -10,8 +9,7 @@ function App() {
     <div className="App">
       <header className="App-header">
        <Header />
-       <Dashboard />
-       <Wizard />
+       {routes}
       </header>
     </div>
   );
