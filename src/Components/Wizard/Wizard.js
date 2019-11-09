@@ -19,13 +19,15 @@ export default class Wizard extends Component{
         this.setState({name: '', address: '', city: '', state: '', zip_code: ''})
     }
     onClick(){
-        axios.post('http://localhost/api/wizard', {
-            name: this.state.nameChangeHandler,
-            address: this.state.addressChangeHandler,
-            city: this.state.cityChangeHandler,
-            state: this.state.stateChangeHandler,
-            zip_code: this.state.stateChangeHandler
+        console.log('sanity check');
+        axios.post('http://localhost:4000/api/wizard', {
+            name: this.state.name,
+            address: this.state.address,
+            city: this.state.city,
+            state: this.state.state,
+            zip_code: this.state.zip_code
         })
+        this.clearInputs();
     }
     nameChangeHandler(event) {
         this.setState({name: event.target.value})
@@ -82,7 +84,7 @@ export default class Wizard extends Component{
                  }}>
                     Cancel
                  </button>
-                 <button onClick={this.onClick()}>
+                 <button onClick={() => this.onClick()}>
                      Complete
                 </button>
 

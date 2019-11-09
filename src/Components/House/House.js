@@ -11,6 +11,7 @@ export default class House extends Component{
                 <div className='city'>{city}</div>
                 <div className='state'>{state}</div>
                 <div className='zip'>{zip_code}</div>
+                <button>Delete</button>
             </div>
         )
     }

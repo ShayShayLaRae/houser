@@ -11,8 +11,9 @@ module.exports= {
         })
     },
     addHouse(req, res) {
-        const db= req.app.get('db')
-        db.add_house()
+        console.log('house', req.body)
+        const db = req.app.get('db')
+        db.add_house(req.body)
         .then(result => {
             res.status(200).send(result)
         }).catch(err => {
