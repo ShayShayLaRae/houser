@@ -19,7 +19,11 @@ export default class Dashboard extends Component{
         });
     }
 
+    
+    //Todo pass props to House to show new house list after delete function
+
     render(){
+        const {componentDidMount} = this.props;
         return(
             <div>
 
