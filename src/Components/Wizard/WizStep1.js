@@ -34,9 +34,9 @@ export default class WizStep1 extends Component {
 
 
     render() {
-        console.log('Does it work?', this.props);
         
         const { name, address, city, state, zip_code } = this.state;
+        console.log('Does it work?', this.props);
         return (
             <div>
                 <input
@@ -81,7 +81,7 @@ export default class WizStep1 extends Component {
     }
 }
 
-function mapStateToProps(reduxState) {
+function mapStateToProps(state) {
     return reduxState
 }
 
