@@ -2,13 +2,16 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 export default class House extends Component{
-    //Todo finish delete button after passing props for .get
+
 
     onClick(id) {
         axios.delete(`http://localhost:4000/api/wizard/${id}`) 
+        .then(() => {
+            this.props.getHouseList()
+        })
     }
     render(){
-        const {house} = this.props;
+        const {house, getHouseList} = this.props;
         const {id, name, address, city, state, zip_code} = house;
         return(
             <div>

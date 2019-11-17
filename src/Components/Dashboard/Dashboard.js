@@ -10,7 +10,7 @@ export default class Dashboard extends Component{
         this.state = {houseList:[]}
     }
 
-    componentDidMount(){
+    getHouses=() => {
         axios.get('http://localhost:4000/api/')
         .then(results => {
             this.setState({
@@ -19,21 +19,23 @@ export default class Dashboard extends Component{
         });
     }
 
-    
-    //Todo pass props to House to show new house list after delete function
+    componentDidMount(){
+       this.getHouses()
+    }
+
 
     render(){
-        const {componentDidMount} = this.props;
+        
         return(
             <div>
 
                 {this.state.houseList.map(h =>
-                <House key={h.id} house={h} />
+                <House key={h.id} house={h} getHouseList={this.getHouses} />
                     )}
-                    <Link to='/wizard'>
-                    <button className='propertyBtn'>
-                    Add New Property
-                    </button>
+                    <Link to='/wizard/step1'>
+                        <button className='propertyBtn'>
+                        Add New Property
+                        </button>
                     </Link>
             </div>
 

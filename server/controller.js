@@ -11,7 +11,7 @@ module.exports= {
         })
     },
     addHouse(req, res) {
-        console.log('house', req.body)
+        // console.log('house', req.body)
         const db = req.app.get('db')
         db.add_house(req.body)
         .then(result => {
