@@ -9,16 +9,29 @@ import store from '../../ducks/store';
 export default class WizStep3 extends Component {
     constructor() {
         super();
-        const {monthly_mortgage, rent} = store.getState()
+        const { name,
+            address,
+            city,
+            state,
+            zip_code,
+            img,
+            monthly_mortgage,
+            rent } = store.getState()
         this.state = {
             monthly_mortgage: monthly_mortgage,
-            rent: rent
+            rent: rent,
+            name: name,
+            address: address,
+            city: city,
+            state: state,
+            zip_code: zip_code,
+            img: img,
         }
     }
 
 
     // clearInputs() {
-    //     this.setState({ name: '', address: '', city: '', state: '', zip_code: '', img: '', monthly_mortage: '', rent: '' })
+    //     this.setState({ name, address: '', city: '', state: '', zip_code: '', img: '', monthly_mortage: '', rent: '' })
     // }
     onClickAdd() {
         axios.post('http://localhost:4000/api/wizard', {
@@ -28,12 +41,12 @@ export default class WizStep3 extends Component {
             state: this.state.state,
             zip_code: this.state.zip_code,
             img: this.state.img,
-            monthly_mortage: this.state.monthly_mortage,
+            monthly_mortgage: this.state.monthly_mortgage,
             rent: this.state.rent
         })
-        .then(() => {
-            store.getState()
-        })
+            .then(() => {
+                store.getState()
+            })
         alert('all good');
     }
 
@@ -46,7 +59,9 @@ export default class WizStep3 extends Component {
     }
 
     render() {
-        const {monthly_mortgage, rent} = this.state;
+        console.log(this.props);
+
+        const { monthly_mortgage, rent } = this.state;
         return (
             <div>
 
@@ -64,18 +79,18 @@ export default class WizStep3 extends Component {
                 />
 
                 <Link to='/'>
-                    <button onClick={() => 
+                    <button onClick={() =>
                         this.onClickAdd()}>
                         Complete
-                </button>
+                    </button>
                 </Link>
                 <Link to='/wizard/step2'>
                     <button onClick={(event) => {
                         store.dispatch(setWizStep3(monthly_mortgage, rent))
-                        setTimeout(() => {console.log('store', store.getState())}, 500);
+                        setTimeout(() => { console.log('store', store.getState()) }, 500);
                     }}>
                         Previous
-                </button>
+                    </button>
                 </Link>
             </div>
         )

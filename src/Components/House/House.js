@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import './House.css';
 
 export default class House extends Component{
 
@@ -12,7 +13,7 @@ export default class House extends Component{
     }
     render(){
         const {house, getHouseList} = this.props;
-        const {id, name, address, city, state, zip_code} = house;
+        const {id, name, address, city, state, zip_code, img, monthly_mortgage, rent} = house;
         return(
             <div>
                 <div className='name'>{name}</div>
@@ -20,6 +21,9 @@ export default class House extends Component{
                 <div className='city'>{city}</div>
                 <div className='state'>{state}</div>
                 <div className='zip'>{zip_code}</div>
+                <img src={img} alt='house' className='image' />
+                <div className='mortgage'>{monthly_mortgage}</div>
+                <div className='rent'>{rent}</div>
                 <button onClick={() => this.onClick(id)}>
                     Delete
                 </button>

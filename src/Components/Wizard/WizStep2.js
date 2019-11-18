@@ -41,7 +41,7 @@ export default class WizStep2 extends Component {
                 <Link to='/wizard/step3'>
                     <button onClick={(event) => {
                         store.dispatch(setWizStep2(img))
-                        setTimeout(() => { console.log('store: ', store.getState()) }, 500);
+                        // setTimeout(() => { console.log('store: ', store.getState()) }, 500);
                     }}>
                         Next
                         </button>

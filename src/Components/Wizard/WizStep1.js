@@ -37,6 +37,8 @@ export default class WizStep1 extends Component {
 
 
     render() {
+        console.log(this.props);
+        
 
         const { name, address, city, state, zip_code } = this.state;
 
