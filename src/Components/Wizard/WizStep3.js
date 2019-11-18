@@ -1,13 +1,20 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setWizStep3 } from '../../ducks/reducer';
+import store from '../../ducks/store';
 
 
-export default class WizStep3 extends Component{
-    // constructor() {
-    //     super();
-
-    // }
+export default class WizStep3 extends Component {
+    constructor() {
+        super();
+        const {monthly_mortgage, rent} = store.getState()
+        this.state = {
+            monthly_mortgage: monthly_mortgage,
+            rent: rent
+        }
+    }
 
 
     clearInputs() {
@@ -27,20 +34,57 @@ export default class WizStep3 extends Component{
         this.clearInputs();
         alert('all good');
     }
-    render(){
-        return(
+
+    monthly_mortgageChangeHandler(event) {
+        this.setState({ monthly_mortgage: event.target.value })
+    }
+
+    rentChangeHandler(event) {
+        this.setState({ rent: event.target.value })
+    }
+
+    render() {
+        const {monthly_mortgage, rent} = this.state;
+        return (
             <div>
-                 <Link to='/'>
-                <button onClick={() => this.onClick()}>
-                    Complete
+
+                <input
+                    value={monthly_mortgage}
+                    placeholder='monthly mortgage'
+                    type='text'
+                    onChange={e => this.monthly_mortgageChangeHandler(e)}
+                />
+                <input
+                    value={rent}
+                    placeholder='desired rent'
+                    type='text'
+                    onChange={e => this.rentChangeHandler(e)}
+                />
+
+                <Link to='/'>
+                    <button onClick={() => this.onClick()}>
+                        Complete
                 </button>
                 </Link>
                 <Link to='/wizard/step2'>
-                <button>
-                    Previous
+                    <button onClick={(event) => {
+                        store.dispatch(setWizStep3(monthly_mortgage, rent))
+                        setTimeout(() => {console.log('store', store.getState())}, 500);
+                    }}>
+                        Previous
                 </button>
                 </Link>
             </div>
         )
     }
 }
+
+function mapStateToProps(reduxState) {
+    const { name, address, city, state, zip_code, img, monthly_mortage, rent } = reduxState
+    return {
+        name: name, address: address, city: city, state: state, zip_code: zip_code,
+        img: img, monthly_mortage: monthly_mortage, rent: rent
+    }
+}
+
+connect(mapStateToProps, { setWizStep3 })(WizStep3)

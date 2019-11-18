@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setWizStep1 } from '../../ducks/reducer';
+import store from '../../ducks/store';
 
 export default class WizStep1 extends Component {
     constructor() {
         super()
+        const { name, address, city, state, zip_code } = store.getState();
         this.state = {
-            name: '',
-            address: '',
-            city: '',
-            state: '',
-            zip_code: ''
+            name: name,
+            address: address,
+            city: city,
+            state: state,
+            zip_code: zip_code
         };
 
     }
@@ -34,9 +37,9 @@ export default class WizStep1 extends Component {
 
 
     render() {
-        
+
         const { name, address, city, state, zip_code } = this.state;
-        console.log('Does it work?', this.props);
+
         return (
             <div>
                 <input
@@ -70,7 +73,11 @@ export default class WizStep1 extends Component {
                     onChange={e => this.zip_codeChangeHandler(e)}
                 />
                 <Link to='/wizard/step2'>
-                    <button>
+                    <button onClick={(event) => {
+                        // setWizStep1(name, address, city, state, zip_code)
+                        store.dispatch(setWizStep1(name, address, city, state, zip_code))
+                        setTimeout(() => { console.log('store: ', store.getState()) }, 500);
+                    }}>
                         Next
                     </button>
                 </Link>
@@ -81,8 +88,9 @@ export default class WizStep1 extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return reduxState
+function mapStateToProps(reduxState) {
+    const { name, address, city, state, zip_code } = reduxState
+    return { name: name, address: address, city: city, state: state, zip_code: zip_code }
 }
 
-connect(mapStateToProps)(WizStep1)
+connect(mapStateToProps, { setWizStep1 })(WizStep1)

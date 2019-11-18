@@ -31,16 +31,17 @@ export default class Wizard extends Component {
         return (
             <div>
                 <Link to='/'>
-                        <button onClick={event => {
-                            this.clearInputs()}}>
-                            Cancel
+                    <button onClick={event => {
+                        this.clearInputs()
+                    }}>
+                        Cancel
                         </button>
                 </Link>
 
                 <Switch>
-                    <Route path='/wizard/step1' component={WizStep1}/>
-                    <Route path='/wizard/step2' component={WizStep2}/>
-                    <Route path='/wizard/step3' component={WizStep3}/>
+                    <Route path='/wizard/step1' component={WizStep1} />
+                    <Route path='/wizard/step2' component={WizStep2} />
+                    <Route path='/wizard/step3' component={WizStep3} />
                 </Switch>
             </div>
         )

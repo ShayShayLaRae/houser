@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setWizStep2 } from '../../ducks/reducer';
+import store from '../../ducks/store';
 
 
 export default class WizStep2 extends Component {
     constructor() {
         super();
         this.state = {
-            img: '',
-            monthly_mortgage: '',
-            rent: ''
+            img: store.getState().img
         };
     }
 
@@ -16,17 +17,8 @@ export default class WizStep2 extends Component {
         this.setState({ img: event.target.value })
     }
 
-    monthly_mortgageChangeHandler(event) {
-        this.setState({ monthly_mortgage: event.target.value })
-    }
-
-    rentChangeHandler(event) {
-        this.setState({ rent: event.target.value })
-    }
-
-
     render() {
-        const { img, monthly_mortgage, rent } = this.state;
+        const {img} = this.state;
         return (
             <div>
                 <input
@@ -35,32 +27,34 @@ export default class WizStep2 extends Component {
                     type='text'
                     onChange={e => this.imgChangeHandler(e)}
                 />
-                <input
-                    value={monthly_mortgage}
-                    placeholder='monthly mortgage'
-                    type='text'
-                    onChange={e => this.monthly_mortgageChangeHandler(e)}
-                />
-                <input
-                    value={rent}
-                    placeholder='desired rent'
-                    type='text'
-                    onChange={e => this.rentChangeHandler(e)}
-                />
+             
 
-                    <Link to='/wizard/step1'>
-                        <button>
-                            Previous
+                <Link to='/wizard/step1'>
+                    <button onClick={(event) => {
+                        store.dispatch(setWizStep2(img))
+                        setTimeout(() => { console.log('store: ', store.getState()) }, 500);
+                    }}>
+                        Previous
                         </button>
-                    </Link>
+                </Link>
 
-                    <Link to='/wizard/step3'>
-                        <button>
-                            Next
+                <Link to='/wizard/step3'>
+                    <button onClick={(event) => {
+                        store.dispatch(setWizStep2(img))
+                        setTimeout(() => { console.log('store: ', store.getState()) }, 500);
+                    }}>
+                        Next
                         </button>
-                    </Link>
+                </Link>
 
             </div>
         )
     }
 }
+
+function mapStateToProps(reduxState) {
+    const {img} = reduxState
+    return {img: img}
+}
+
+connect(mapStateToProps, { setWizStep2 })(WizStep2)
