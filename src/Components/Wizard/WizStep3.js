@@ -17,10 +17,10 @@ export default class WizStep3 extends Component {
     }
 
 
-    clearInputs() {
-        this.setState({ name: '', address: '', city: '', state: '', zip_code: '', img: '', monthly_mortage: '', rent: '' })
-    }
-    onClick() {
+    // clearInputs() {
+    //     this.setState({ name: '', address: '', city: '', state: '', zip_code: '', img: '', monthly_mortage: '', rent: '' })
+    // }
+    onClickAdd() {
         axios.post('http://localhost:4000/api/wizard', {
             name: this.state.name,
             address: this.state.address,
@@ -31,7 +31,9 @@ export default class WizStep3 extends Component {
             monthly_mortage: this.state.monthly_mortage,
             rent: this.state.rent
         })
-        this.clearInputs();
+        .then(() => {
+            store.getState()
+        })
         alert('all good');
     }
 
@@ -62,7 +64,8 @@ export default class WizStep3 extends Component {
                 />
 
                 <Link to='/'>
-                    <button onClick={() => this.onClick()}>
+                    <button onClick={() => 
+                        this.onClickAdd()}>
                         Complete
                 </button>
                 </Link>
